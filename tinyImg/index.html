@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<!-- <meta http-equiv="Access-Control-Allow-Origin" content="*"> -->
+	<title>meituan1_pay_test</title>
+
+</head>
+<body>
+	
+	
+	authCode: <input id='authCode' type="text">
+	
+	<button id='send'>SEND</button>
+
+	textarea : <textarea id="texta" cols="50" rows="20"></textarea>
+
+
+	<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
+	<script type="text/javascript" src="js/sha256.js"></script>
+	<script>
+
+		$('#send')[0].onclick = function(){
+
+
+			let authC = $('#authCode').val();
+			console.log(authC);
+
+			let v = "appId=31221&authCode="+authC+"&body=wgfdasfawawdg&channel=wx_barcode_pay&expireMinutes=5&merchantId=178842081&outTradeNo=1234567891056413213&random=dsarighndaon&subject=wggg465a1sdf6a&totalFee=11&key=45bc3338d9be440db4d70dd2b76c6f42";
+
+		// $('#authCode').val(CryptoJS.SHA256($('#authCode').val()))
+
+		$('#texta').val(CryptoJS.SHA256(v));
+
+		let sign = CryptoJS.SHA256(v);
+
+		$.ajax({
+			type: "POST",
+			url: "http://payfront.zc.st.meituan.com/api/pay/micropay",
+			contentType: "application/json; charset=utf-8",
+			data: JSON.stringify(GetJsonData()),
+			dataType: "json",
+			success: function (message) {
+				console.log(message);
+			},
+			error: function (message) {
+				alert("提交数据失败！");
+			}
+		});
+
+		function GetJsonData() {
+			var json = {
+				"appId":31221,
+				"authCode":authC,
+				"body":"wgfdasfawawdg",
+				"channel":"wx_barcode_pay",
+				"expireMinutes":5,
+				"merchantId":178842081,
+				"outTradeNo":"1234567891056413213",
+				"random":"dsarighndaon",
+				"subject":"wggg465a1sdf6a",
+				"totalFee":11,
+				"sign":sign
+			};
+			return json;
+		}
+
+	}
+
+</script>
+
+ </body>
+ </html>

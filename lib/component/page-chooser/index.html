@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>page-chooser</title>
+	<style>
+	.order-page-chooser{
+		float: right;
+		margin-bottom:20px;
+	}
+	.order-page-chooser div{
+		display:inline-block;
+		cursor:pointer;
+		border:1px solid #BBB;
+		padding:1px 2px;
+		border-radius:3px;
+		background-color:#FFF;
+		color:#F56985;
+		font-size:14px;
+	}
+	.order-page-chooser	.numbers span{
+		display:inline-block;
+		width:22px;
+		margin:0 5px;
+		font-size:14px;
+		color:#888;
+		cursor:pointer;
+	}
+	</style>
+</head>
+<body>
+	
+
+	<div class='order-page-chooser'>
+		<div class='first'><<</div>
+		<span class='numbers'></span>
+		<div class='last'>>></div>
+	</div>
+
+
+	<script>
+	let doc = document;
+	MakePageChooser({
+		obj: document.querySelector('.order-page-chooser'),
+		total:54,
+		callback:null,
+	});
+
+	function MakePageChooser(args){
+
+	let 
+		obj = args.obj,
+		current = args.current || 1,
+		total = args.total || 1,
+		pageNumber = args.pageNumber || 6,
+		callback = args.callback || function(p){console.log('GOT '+p)};
+
+	let toFirstPageBtn = obj.querySelector('.first');
+	let toLastPageBtn = obj.querySelector('.last');
+	let pageNumbers = obj.querySelector('.numbers');
+	toFirstPageBtn.onclick = function(){
+		current = 1;
+		updatePageChooser();
+	}
+	toLastPageBtn.onclick = function(){
+		current = total;
+		updatePageChooser();
+	}
+
+	updatePageChooser();
+	function updatePageChooser(){
+		pageNumbers.innerHTML = '';
+		if(total>pageNumber){
+			if(current===1 || current===2){
+				for(let i=1;i<=pageNumber;i++){
+					let span = null;
+					if(i===pageNumber && i<=total){
+						span = createNumberSpan('...');
+					}else{
+						span = createNumberSpan(i);
+					}
+					if(i === current){
+						pageNumberActive(span);
+					}
+					pageNumbers.appendChild(span);
+				}
+			}else if(current === total || current===total-1 || current==total-2){
+				for(let i=total-5;i<=total;i++){
+					let span = null;
+					if(i===total-5){
+						span = createNumberSpan('...');
+					}else{
+						span = createNumberSpan(i);
+					}
+					if(i === current){
+						pageNumberActive(span);
+					}
+					pageNumbers.appendChild(span);
+				}
+			}else{
+				for(let i=current-2,l=current-2+pageNumber-1;i<=l;i++){
+					let span = null;
+					if(i===current-2+pageNumber-1 && i<=total){
+						span = createNumberSpan('...');
+					}else{
+						span = createNumberSpan(i);
+					}
+					if(i === current){
+						pageNumberActive(span);
+					}
+					pageNumbers.appendChild(span);
+				}
+			}
+		}else{
+			for(let i=1;i<=total;i++){
+				let span = createNumberSpan(i);
+				if(i === current){
+					pageNumberActive(span);
+				}
+				pageNumbers.appendChild(span);
+			}
+		}
+	}
+
+	function createNumberSpan(p){
+		let span = doc.createElement('span');
+		span.innerText = p;
+		if(p !== '...'){
+			span.onclick = function(){
+				current = p;
+				updatePageChooser();
+				callback(p);
+			}
+		}
+		return span;
+	}
+
+	function pageNumberActive(span){
+		span.style.color = '#F56985';
+		span.style.textDecoration = 'underline';
+	}
+}</script>
+</body>
+</html>

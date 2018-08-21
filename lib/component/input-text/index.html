@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>input-text</title>
+	<style>
+		input[type='text']{
+			height:25px;
+			width:100px;
+			border-radius: 5px;
+			border:1px solid #BBB;
+			padding-left:5px;
+			display:inline-block;
+		}
+		img.icon{
+			width:18px;
+			height:18px;
+			transform:translateX(-24px) translateY(4px);
+			cursor:pointer;
+			visibility:hidden;
+		}
+	</style>
+</head>
+<body>
+	<input id='keyword' value="" type='text'>
+	<img class='icon' src="https://mini.wggai.com/storage/img/main-order-detail/close.png">
+
+	<script>
+		let keyWord = document.querySelector('#keyword');
+		let keyWordCloseBtn = keyWord.nextElementSibling;
+		keyWord.onkeyup = function(){
+			let v = this.value;
+			if(v){
+				keyWordCloseBtn.style.visibility = 'visible';
+			}else{
+				keyWordCloseBtn.style.visibility = 'hidden';
+			}
+		};
+		keyWordCloseBtn.onclick = function(){
+			keyWord.value = '';
+			this.style.visibility = 'hidden';
+		};
+		</script>
+</body>
+</html>

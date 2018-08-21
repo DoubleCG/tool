@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>select</title>
+	<style>
+			.rankway-select{
+				position:absolute;
+				top:0;
+				right:80px;
+				border:1px solid #999;
+				padding:2px;
+				cursor: pointer;
+				height:24px;
+				width:120px;
+				overflow:hidden;
+				transition: all 0.3s;
+				padding:0;
+				background-color:#FFF;
+				font-size:14px;
+			}
+			span{
+				padding-left:5px;
+			}
+
+			img{
+				float: right;
+				width:16px;
+				height: 16px;
+				transform:translateY(2px);
+			}
+			.options{
+				margin-top:4px;
+				border-top:2px solid #999;
+			}
+			.options>div{
+				height:30px;
+				line-height:30px;
+				padding-left:5px;
+			}
+			.options>div:hover{
+				background-color:#f7424f;
+			}
+	</style>
+</head>
+<body>
+<div class='rankway-select'>
+	<span>时间从新到旧</span>
+	<img src="https://mini.wggai.com/storage/img/main-dish-management/down.png">
+	<div class='options'>
+		<div data-v="1">时间从新到旧</div>
+		<div data-v="2">时间从旧到新</div>
+		<div data-v="3">置顶自提订单</div>
+		<div data-v="4">置顶配送订单</div>
+		<div data-v="5">置顶已取餐订单</div>
+		<div data-v="6">置顶已送出订单</div>
+		<div data-v="7">置顶未送出订单</div>
+	</div>
+</div>
+
+
+
+<script>
+    let rankwaySelect = document.querySelector('.rankway-select');
+    let rankwaySelectOptions = document.querySelectorAll('.options>div');
+
+    rankwaySelect.onclick = function(){
+        let t = this;
+        let onHeight = 24 + 30 * rankwaySelectOptions.length;
+        let offHeight = 24;
+        t.style.height = (t.on?offHeight:onHeight) + 'px';
+        t.on = !t.on;
+    };
+
+    for(let i of rankwaySelectOptions){
+        i.onclick = function(){
+            rankwaySelect.querySelector('span').innerText = this.innerText;
+            rankwaySelect.value = this.dataset.v;
+        }            
+    }
+</script>
+
+</body>
+</html>
