@@ -1,23 +1,38 @@
 ﻿let imgCropper = null;
 
-let EID = function(id){
+let getId = function(id){
   return document.getElementById(id);
 }
 
+
 // 输出的图片大小
-let width = 30;
-let height = 30;
+let width = 100;
+let height = 100;
 
 
-EID('input-getImg').onchange = function(){
+function ensureWH(){
+  // 获取输出的宽高
+  let w = parseInt(getId('output-width').value);
+  let h = parseInt(getId('output-height').value);
+  width = w || 100;
+  height = h || 100;
+  updateImgDisplay();
+}
+
+
+
+getId('input-getImg').onchange = updateImgDisplay;
+
+
+function updateImgDisplay(){
   let r = new FileReader();
-  r.readAsDataURL(EID('input-getImg').files[0]);
+  r.readAsDataURL(getId('input-getImg').files[0]);
   r.onload = function(){
     console.log('read file 100%');
     console.log('DataURL:');
     console.log(r.result);
-    EID('newPHeadImg').src=r.result;
-    imgCropper = new Cropper(EID('newPHeadImg'), {
+    getId('newPHeadImg').src=r.result;
+    imgCropper = new Cropper(getId('newPHeadImg'), {
       //裁剪比例 w:h
       aspectRatio: width/height,
       crop: function(e) {
@@ -28,9 +43,10 @@ EID('input-getImg').onchange = function(){
 }
 
 
-EID('cac').onclick = function(){
+getId('cac').onclick = function(){
   console.log('cac')
   if(!imgCropper) return ;
+
   let canvas = imgCropper.getCroppedCanvas({width,height});
   canvas.toBlob(d=>{
   	console.log(d);
