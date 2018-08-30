@@ -1,0 +1,90 @@
+/*
+Icon classes can be used entirely standalone. They are named after their original file names.
+
+Example usage in HTML:
+
+`display: block` sprite:
+<div class="icon-home"></div>
+
+To change `display` (e.g. `display: inline-block;`), we suggest using a common CSS class:
+
+// CSS
+.icon {
+  display: inline-block;
+}
+
+// HTML
+<i class="icon icon-home"></i>
+*/
+.icon-a1 {
+  background-image: url(sprite.png);
+  background-position: -440px -700px;
+  width: 219px;
+  height: 240px;
+}
+.icon-a2 {
+  background-image: url(sprite.png);
+  background-position: 0px -461px;
+  width: 221px;
+  height: 239px;
+}
+.icon-a3 {
+  background-image: url(sprite.png);
+  background-position: -861px -240px;
+  width: 220px;
+  height: 240px;
+}
+.icon-c1 {
+  background-image: url(sprite.png);
+  background-position: -640px 0px;
+  width: 221px;
+  height: 240px;
+}
+.icon-c2 {
+  background-image: url(sprite.png);
+  background-position: -441px -461px;
+  width: 220px;
+  height: 238px;
+}
+.icon-c3 {
+  background-image: url(sprite.png);
+  background-position: -221px -461px;
+  width: 220px;
+  height: 239px;
+}
+.icon-o1 {
+  background-image: url(sprite.png);
+  background-position: -320px 0px;
+  width: 320px;
+  height: 230px;
+}
+.icon-o2 {
+  background-image: url(sprite.png);
+  background-position: 0px -231px;
+  width: 320px;
+  height: 230px;
+}
+.icon-o3 {
+  background-image: url(sprite.png);
+  background-position: 0px 0px;
+  width: 320px;
+  height: 231px;
+}
+.icon-q1 {
+  background-image: url(sprite.png);
+  background-position: -861px 0px;
+  width: 220px;
+  height: 240px;
+}
+.icon-q2 {
+  background-image: url(sprite.png);
+  background-position: -220px -700px;
+  width: 220px;
+  height: 240px;
+}
+.icon-q3 {
+  background-image: url(sprite.png);
+  background-position: 0px -700px;
+  width: 220px;
+  height: 240px;
+}
